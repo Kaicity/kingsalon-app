@@ -1,0 +1,28 @@
+package com.kingree.payload.dto;
+
+import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Data
+public class SalonDTO {
+
+    private Long id;
+
+    private List<String> images;
+
+    private String address;
+
+    private String phoneNumber;
+
+    private String email;
+
+    private String city;
+
+    private Long ownerId;
+
+    private LocalDateTime openTime;
+
+    private LocalDateTime closeTime;
+}
