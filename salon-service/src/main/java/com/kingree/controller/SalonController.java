@@ -38,8 +38,9 @@ public class SalonController {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(1L);
 
-        Salon salon = salonService.updateSalon(salonDTO, userDTO, id);
+        System.out.println(id);
 
+        Salon salon = salonService.updateSalon(salonDTO, userDTO, id);
         SalonDTO resSalonDTO = salonMapper.mapToDTO(salon);
 
         return ResponseEntity.ok(resSalonDTO);
