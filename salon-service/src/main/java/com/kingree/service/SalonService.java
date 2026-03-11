@@ -9,11 +9,11 @@ import java.util.List;
 public interface SalonService {
     Salon createSalon(SalonDTO salonDTO, UserDTO userDTO);
 
-    Salon updateSalon(SalonDTO salonDTO, UserDTO userDTO, Long id);
+    Salon updateSalon(SalonDTO salonDTO, UserDTO userDTO, Long id) throws Exception;
 
     List<Salon> getAllSalons();
 
-    Salon getSalonById(Long id);
+    Salon getSalonById(Long id) throws Exception;
 
     Salon getSalonByOwnerId(Long ownerId);
 

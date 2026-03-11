@@ -13,6 +13,9 @@ public class Salon {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
+    private String name;
+
     @ElementCollection
     private List<String> images;
 

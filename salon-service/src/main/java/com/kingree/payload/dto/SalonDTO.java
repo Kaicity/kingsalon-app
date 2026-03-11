@@ -10,6 +10,8 @@ public class SalonDTO {
 
     private Long id;
 
+    private String name;
+
     private List<String> images;
 
     private String address;

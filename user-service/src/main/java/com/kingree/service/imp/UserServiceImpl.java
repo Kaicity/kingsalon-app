@@ -2,7 +2,7 @@ package com.kingree.service.imp;
 
 import com.kingree.exception.UserException;
 import com.kingree.modal.User;
-import com.kingree.repository.UserRespository;
+import com.kingree.repository.UserRepository;
 import com.kingree.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +15,16 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     @Autowired
-    private final UserRespository userRespository;
+    private final UserRepository userRepository;
 
     @Override
     public User createUser(User user) {
-        return userRespository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
     public User updatedUser(User user, Long id) throws UserException {
-        Optional<User> otp = userRespository.findById(id);
+        Optional<User> otp = userRepository.findById(id);
         if (otp.isEmpty()) {
             throw new UserException("User not found with id " + id);
         }
@@ -34,17 +34,17 @@ public class UserServiceImpl implements UserService {
         existingUser.setRole(user.getRole());
         existingUser.setUsername(user.getUsername());
 
-        return userRespository.save(existingUser);
+        return userRepository.save(existingUser);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return userRespository.findAll();
+        return userRepository.findAll();
     }
 
     @Override
     public User getUserById(Long id) throws UserException {
-        Optional<User> otp = userRespository.findById(id);
+        Optional<User> otp = userRepository.findById(id);
         if (otp.isPresent()) {
             return otp.get();
         }
@@ -53,10 +53,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long id) throws UserException {
-        Optional<User> otp = userRespository.findById(id);
+        Optional<User> otp = userRepository.findById(id);
         if (otp.isEmpty()) {
             throw new UserException("user not found with id " + id);
         }
-        userRespository.deleteById(otp.get().getId());
+        userRepository.deleteById(otp.get().getId());
     }
 }
