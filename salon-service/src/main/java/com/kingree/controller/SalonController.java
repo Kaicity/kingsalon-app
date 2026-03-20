@@ -38,8 +38,6 @@ public class SalonController {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(1L);
 
-        System.out.println(id);
-
         Salon salon = salonService.updateSalon(salonDTO, userDTO, id);
         SalonDTO resSalonDTO = salonMapper.mapToDTO(salon);
 

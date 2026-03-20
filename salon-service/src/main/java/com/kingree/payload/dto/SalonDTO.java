@@ -3,6 +3,7 @@ package com.kingree.payload.dto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Data
@@ -24,7 +25,7 @@ public class SalonDTO {
 
     private Long ownerId;
 
-    private LocalDateTime openTime;
+    private LocalTime openTime;
 
-    private LocalDateTime closeTime;
+    private LocalTime closeTime;
 }

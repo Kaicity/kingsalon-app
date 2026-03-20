@@ -6,7 +6,7 @@ import lombok.Data;
 public class SalonReport {
     private Long salonId;
     private String salonName;
-    private Double totalEarning;
+    private int totalEarning;
     private Integer totalBooking;
     private Integer cancelledBooking;
     private Double totalRefund;

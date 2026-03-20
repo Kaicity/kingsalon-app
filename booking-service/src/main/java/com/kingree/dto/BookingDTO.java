@@ -1,18 +1,14 @@
-package com.kingree.modal;
+package com.kingree.dto;
 
 import com.kingree.domain.BookingStatus;
-import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Entity
 @Data
-public class Booking {
+public class BookingDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Long salonId;
@@ -23,11 +19,7 @@ public class Booking {
 
     private LocalDateTime endTime;
 
-    @ElementCollection
     private Set<Long> serviceIds;
 
-    private BookingStatus status = BookingStatus.PENDING;
-
-    private int totalPrice;
-
+    private BookingStatus status;
 }

@@ -20,7 +20,7 @@ public class CategoryServiceImpl implements CategoryService {
     public Category saveCategory(Category category, SalonDTO salonDTO) {
         Category newCategory = new Category();
         newCategory.setName(category.getName());
-        newCategory.setImages(category.getImages());
+        newCategory.setImage(category.getImage());
         newCategory.setSalonId(salonDTO.getId());
 
         return categoryRepository.save(newCategory);
