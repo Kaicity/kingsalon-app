@@ -53,9 +53,7 @@ public class BookingServiceImpl implements BookingService {
         newBooking.setEndTime(bookingEndTime);
         newBooking.setTotalPrice(totalPrice);
 
-        bookingRepository.save(newBooking);
-
-        return null;
+        return bookingRepository.save(newBooking);
     }
 
     public Boolean isTimeSlotAvailable(SalonDTO salonDTO, LocalDateTime bookingStartTime, LocalDateTime bookingEndTime) throws Exception {
@@ -65,6 +63,9 @@ public class BookingServiceImpl implements BookingService {
         LocalDateTime salonCloseTime = salonDTO.getCloseTime().atDate(bookingStartTime.toLocalDate());
 
         // Check booking is available within time working of salon
+        System.out.println(bookingStartTime);
+        System.out.println(salonOpenTime);
+        System.out.println(salonCloseTime);
         if (bookingStartTime.isBefore(salonOpenTime) || bookingEndTime.isAfter(salonCloseTime)) {
             throw new Exception("Booking time must be within salon's working house");
         }

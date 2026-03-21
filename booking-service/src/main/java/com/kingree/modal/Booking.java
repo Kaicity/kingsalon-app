@@ -26,6 +26,7 @@ public class Booking {
     @ElementCollection
     private Set<Long> serviceIds;
 
+    @Enumerated(EnumType.STRING)
     private BookingStatus status = BookingStatus.PENDING;
 
     private int totalPrice;
