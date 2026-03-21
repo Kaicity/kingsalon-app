@@ -15,8 +15,8 @@ This project demonstrates scalable backend design and modern frontend integratio
 
 ### Backend (Microservices)
 
-- Node.js / Express.js
-- MySQL
+- Java, Spring Boot, Hibernate/JPA, Lombok, MapStruct
+- MySQL, Firebase
 - JWT Authentication
 - WebSocket (Socket.IO)
 
