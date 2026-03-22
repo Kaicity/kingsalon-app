@@ -1,6 +1,5 @@
 package com.kingree.payload.dto;
 
-import com.kingree.domain.BookingStatus;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -21,5 +20,5 @@ public class BookingDTO {
 
     private Set<Long> serviceIds;
 
-    private BookingStatus status;
+    private Long totalPrice;
 }

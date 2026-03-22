@@ -26,18 +26,45 @@ This project demonstrates scalable backend design and modern frontend integratio
 
 ```mermaid
 graph TD
-    A[Client - Next.js] --> B[API Gateway]
 
-    B --> C[User Service]
-    B --> D[Booking Service]
-    B --> E[Salon Service]
-    B --> F[Category Service]
-    B --> G[Service Offering]
-    B --> G[Payment Service]
+    subgraph Client
+        A[Next.js App]
+    end
 
-    C --> DB1[(MySQL)]
-    D --> DB2[(MySQL)]
-    E --> DB3[(MySQL)]
-    F --> DB4[(MySQL)]
-    G --> DB5[(MySQL)]
-    G --> DB6[(MySQL)]
+    subgraph Gateway
+        B[API Gateway]
+    end
+
+    subgraph Services
+        C[User Service]
+        D[Booking Service]
+        E[Salon Service]
+        F[Category Service]
+        G[Service Offering]
+        H[Payment Service]
+    end
+
+    subgraph Databases
+        DB1[(User DB)]
+        DB2[(Booking DB)]
+        DB3[(Salon DB)]
+        DB4[(Category DB)]
+        DB5[(Service DB)]
+        DB6[(Payment DB)]
+    end
+
+    A --> B
+
+    B --> C
+    B --> D
+    B --> E
+    B --> F
+    B --> G
+    B --> H
+
+    C --> DB1
+    D --> DB2
+    E --> DB3
+    F --> DB4
+    G --> DB5
+    H --> DB6
