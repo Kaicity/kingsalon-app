@@ -1,0 +1,38 @@
+package com.kingree.configuration;
+
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.JacksonJsonMessageConverter;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class RabbitMQConfig {
+
+    @Bean
+    JacksonJsonMessageConverter jacksonJsonMessageConverter() {
+        return new JacksonJsonMessageConverter();
+    }
+
+    @Bean
+    RabbitTemplate rabbitTemplate(
+            ConnectionFactory connectionFactory,
+            JacksonJsonMessageConverter jacksonJsonMessageConverter) {
+
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setMessageConverter(jacksonJsonMessageConverter);
+
+        return rabbitTemplate;
+    }
+
+    @Bean
+    Queue bookingQueue() {
+        return new Queue("booking-queue");
+    }
+
+    @Bean
+    Queue notificationQueue() {
+        return new Queue("notification-queue");
+    }
+}
