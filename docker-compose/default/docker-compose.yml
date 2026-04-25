@@ -16,6 +16,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: userdb
+    volumes:
+      - userdb_data:/var/lib/mysql
     networks:
       - kaicity
 
@@ -33,6 +35,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: salondb
+    volumes:
+      - salondb_data:/var/lib/mysql
     networks:
       - kaicity
 
@@ -50,6 +54,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: categorydb
+    volumes:
+      - categorydb_data:/var/lib/mysql
     networks:
       - kaicity
 
@@ -67,6 +73,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: servicedb
+    volumes:
+      - servicedb_data:/var/lib/mysql
     networks:
       - kaicity
 
@@ -84,6 +92,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: bookingdb
+    volumes:
+      - bookingdb_data:/var/lib/mysql
     networks:
       - kaicity
 
@@ -101,6 +111,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: paymentdb
+    volumes:
+      - paymentdb_data:/var/lib/mysql
     networks:
       - kaicity
 
@@ -118,6 +130,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: notificationdb
+    volumes:
+      - notificationdb_data:/var/lib/mysql
     networks:
       - kaicity
 
@@ -135,6 +149,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: reviewdb
+    volumes:
+      - reviewdb_data:/var/lib/mysql
     networks:
       - kaicity
 
@@ -287,6 +303,8 @@ services:
         condition: service_healthy
       eurekaserver:
         condition: service_healthy
+      rabbitmq:
+        condition: service_started
     healthcheck:
       test: "curl --fail --silent booking:5005/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
@@ -302,6 +320,12 @@ services:
       SPRING_DATASOURCE_URL: "jdbc:mysql://bookingdb:3306/bookingdb"
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: admin
+      SPRING_RABBITMQ_PASSWORD: 123456
+
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
     networks:
       - kaicity
@@ -316,6 +340,8 @@ services:
         condition: service_healthy
       eurekaserver:
         condition: service_healthy
+      rabbitmq:
+        condition: service_started
     healthcheck:
       test: "curl --fail --silent payment:5006/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
@@ -331,6 +357,12 @@ services:
       SPRING_DATASOURCE_URL: "jdbc:mysql://paymentdb:3306/paymentdb"
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: admin
+      SPRING_RABBITMQ_PASSWORD: 123456
+
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
     networks:
       - kaicity
@@ -345,6 +377,8 @@ services:
         condition: service_healthy
       eurekaserver:
         condition: service_healthy
+      rabbitmq:
+        condition: service_started
     healthcheck:
       test: "curl --fail --silent notification:5007/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
@@ -360,6 +394,12 @@ services:
       SPRING_DATASOURCE_URL: "jdbc:mysql://notificationdb:3306/notificationdb"
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: admin
+      SPRING_RABBITMQ_PASSWORD: 123456
+
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
     networks:
       - kaicity
@@ -375,7 +415,7 @@ services:
       eurekaserver:
         condition: service_healthy
     healthcheck:
-      test: "curl --fail --silent user:5001/actuator/health/readiness | grep UP || exit 1"
+      test: "curl --fail --silent review:5008/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
       timeout: 5s
       retries: 10
@@ -421,12 +461,28 @@ services:
     image: rabbitmq:4-management
     container_name: rabbitmq
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "5672:5672" # AMQP
+      - "15672:15672" # Management UI
     environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: 123456
+    networks:
+      - kaicity
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    restart: always
 
 networks:
   kaicity:
     driver: "bridge"
+
+volumes:
+  userdb_data:
+  salondb_data:
+  categorydb_data:
+  servicedb_data:
+  bookingdb_data:
+  paymentdb_data:
+  notificationdb_data:
+  reviewdb_data:
+  rabbitmq_data:
