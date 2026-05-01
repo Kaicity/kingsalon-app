@@ -135,8 +135,9 @@ graph TD
 | **Booking Service**  | `5005` | Appointment creation, scheduling, status tracking |
 | **Category Service** | `5003` | Service categories (haircut, coloring, etc.)      |
 | **Service Offering** | `5004` | Individual services offered by salons             |
-| **Payment Service**  | `5006` | Payment processing and transaction history        |
+| **Payment Service**  | `5005` | Payment processing and transaction history        |
 | **Notifications**    | `5007` | Push & WebSocket notifications                    |
+| **Reviews**          | `5008` | Review and rating services                        |
 
 ---
 
@@ -229,7 +230,8 @@ API exploration:
 | Service Offering | http://localhost:5004/api/service-offering/      |
 | Booking Service  | http://localhost:5005/api/bookings/              |
 | Payment Service  | http://localhost:5006/api/payments/              |
-| Notifications    | http://localhost:5006/api/notifications/         |
+| Notifications    | http://localhost:5007/api/notifications/         |
+| Reviews          | http://localhost:5008/api/reviews/               |
 
 > A Postman collection is available in `/docs/postman_collection.json`
 
