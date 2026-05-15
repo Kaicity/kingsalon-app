@@ -28,7 +28,7 @@ public class AuthController {
     }
 
     @GetMapping("/access-token/refresh-token/{refreshToken}")
-    public ResponseEntity<AuthResponse> getAccessToken(@PathVariable("refreshToken") String refreshToken) throws Exception {
+    public ResponseEntity<AuthResponse> getAccessToken(@PathVariable String refreshToken) throws Exception {
         AuthResponse authResponse = authService.getAccessTokenFromRefreshToken(refreshToken);
         return ResponseEntity.ok(authResponse);
     }

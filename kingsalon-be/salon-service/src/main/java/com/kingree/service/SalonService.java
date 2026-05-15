@@ -1,6 +1,7 @@
 package com.kingree.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.kingree.payload.dto.SalonDTO;
 
@@ -9,11 +10,11 @@ public interface SalonService {
 
     SalonDTO updateSalon(String jwt, SalonDTO salonDTO, Long id) throws Exception;
 
-    List<SalonDTO> getAllSalons();
+    Page<SalonDTO> getAllSalons();
 
     SalonDTO getSalonById(Long id) throws Exception;
 
     SalonDTO getSalonByOwnerId(String jwt) throws Exception;
 
-    List<SalonDTO> searchSalonByCity(String city);
+    Page<SalonDTO> searchSalonByCity(String keyword, Pageable pageable);
 }

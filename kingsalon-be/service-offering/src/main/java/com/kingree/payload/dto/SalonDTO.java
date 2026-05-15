@@ -1,4 +1,4 @@
-package com.kingree.dto;
+package com.kingree.payload.dto;
 
 import java.time.LocalTime;
 import java.util.List;

@@ -1,11 +1,11 @@
 package com.kingree.service.client;
 
-import com.kingree.dto.CategoryDTO;
-
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import com.kingree.payload.dto.CategoryDTO;
 
 @FeignClient("category-service")
 public interface CategoryFeignClient {

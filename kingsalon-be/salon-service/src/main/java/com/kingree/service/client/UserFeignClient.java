@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface UserFeignClient {
 
     @GetMapping("/api/users/{id}")
-    ResponseEntity<UserDTO> getUserById(@PathVariable("id") Long id) throws Exception;
+    ResponseEntity<UserDTO> getUserById(@PathVariable Long id) throws Exception;
 
     @GetMapping("/api/users/profile")
     ResponseEntity<UserDTO> getUserProfile(@RequestHeader("Authorization") String jwt) throws Exception;

@@ -12,17 +12,18 @@ import org.springframework.stereotype.Service;
 
 import com.kingree.domain.BookingStatus;
 import com.kingree.domain.PaymentMethod;
-import com.kingree.dto.BookingDTO;
-import com.kingree.dto.BookingRequest;
-import com.kingree.dto.BookingSlotDTO;
-import com.kingree.dto.PaymentLinkResponse;
-import com.kingree.dto.SalonDTO;
-import com.kingree.dto.SalonReport;
-import com.kingree.dto.ServiceOfferingDTO;
-import com.kingree.dto.UserDTO;
-import com.kingree.dto.event.PaymentOrderEvent;
 import com.kingree.mapper.BookingMapper;
 import com.kingree.modal.Booking;
+import com.kingree.payload.dto.BookingDTO;
+import com.kingree.payload.dto.BookingRequest;
+import com.kingree.payload.dto.BookingSlotDTO;
+import com.kingree.payload.dto.PaymentLinkResponse;
+import com.kingree.payload.dto.SalonDTO;
+import com.kingree.payload.dto.SalonReport;
+import com.kingree.payload.dto.ServiceOfferingDTO;
+import com.kingree.payload.dto.UserDTO;
+import com.kingree.payload.dto.event.PaymentOrderEvent;
+import com.kingree.payload.response.PageResponse;
 import com.kingree.repository.BookingRepository;
 import com.kingree.service.BookingService;
 import com.kingree.service.client.PaymentFeignClient;
@@ -66,11 +67,11 @@ public class BookingServiceImpl implements BookingService {
         salonDTO.setImages(new ArrayList<>());
         salonDTO.setOwnerId(54L);
 
-        Set<ServiceOfferingDTO> servicesOfferingDTO = serviceOfferingFeignClient
+        PageResponse<ServiceOfferingDTO> servicesOfferingDTO = serviceOfferingFeignClient
                 .getServiceByIds(bookingRequest.getServiceIds()).getBody();
 
         // Calculate total duration services
-        int totalDuration = servicesOfferingDTO.stream()
+        int totalDuration = servicesOfferingDTO.getContent().stream()
                 .mapToInt(ServiceOfferingDTO::getDuration)
                 .sum();
 
@@ -80,11 +81,12 @@ public class BookingServiceImpl implements BookingService {
         // Find slot available
         isTimeSlotAvailable(jwt, salonDTO, bookingStartTime, bookingEndTime);
 
-        int totalPrice = servicesOfferingDTO.stream()
+        int totalPrice = servicesOfferingDTO.getContent().stream()
                 .mapToInt(ServiceOfferingDTO::getPrice)
                 .sum();
 
-        Set<Long> serviceIds = servicesOfferingDTO.stream().map(ServiceOfferingDTO::getId).collect(Collectors.toSet());
+        Set<Long> serviceIds = servicesOfferingDTO.getContent().stream().map(ServiceOfferingDTO::getId)
+                .collect(Collectors.toSet());
 
         Booking newBooking = new Booking();
         newBooking.setCustomerId(userDTO.getId());

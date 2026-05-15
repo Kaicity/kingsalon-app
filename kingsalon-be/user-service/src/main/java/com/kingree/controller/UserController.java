@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kingree.modal.User;
+import com.kingree.payload.response.PageResponse;
 import com.kingree.service.UserService;
 
 import jakarta.validation.Valid;
@@ -31,8 +32,9 @@ public class UserController {
     }
 
     @GetMapping("/api/users")
-    public ResponseEntity<Page<User>> getUsers(Pageable pageable) {
-        return ResponseEntity.ok(userService.getAllUsers(pageable));
+    public ResponseEntity<PageResponse<User>> getUsers(Pageable pageable) {
+        Page<User> users = userService.getAllUsers(pageable);
+        return ResponseEntity.ok(PageResponse.from(users));
     }
 
     @GetMapping("/api/users/{id}")

@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kingree.domain.BookingStatus;
 import com.kingree.domain.PaymentMethod;
-import com.kingree.dto.BookingDTO;
-import com.kingree.dto.BookingRequest;
-import com.kingree.dto.BookingSlotDTO;
-import com.kingree.dto.PaymentLinkResponse;
-import com.kingree.dto.SalonReport;
+import com.kingree.payload.dto.BookingDTO;
+import com.kingree.payload.dto.BookingRequest;
+import com.kingree.payload.dto.BookingSlotDTO;
+import com.kingree.payload.dto.PaymentLinkResponse;
+import com.kingree.payload.dto.SalonReport;
 import com.kingree.service.BookingService;
 
 import lombok.RequiredArgsConstructor;

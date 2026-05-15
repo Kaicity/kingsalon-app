@@ -5,12 +5,12 @@ import java.util.List;
 
 import com.kingree.domain.BookingStatus;
 import com.kingree.domain.PaymentMethod;
-import com.kingree.dto.BookingDTO;
-import com.kingree.dto.BookingRequest;
-import com.kingree.dto.BookingSlotDTO;
-import com.kingree.dto.PaymentLinkResponse;
-import com.kingree.dto.SalonReport;
-import com.kingree.dto.event.PaymentOrderEvent;
+import com.kingree.payload.dto.BookingDTO;
+import com.kingree.payload.dto.BookingRequest;
+import com.kingree.payload.dto.BookingSlotDTO;
+import com.kingree.payload.dto.PaymentLinkResponse;
+import com.kingree.payload.dto.SalonReport;
+import com.kingree.payload.dto.event.PaymentOrderEvent;
 
 public interface BookingService {
     PaymentLinkResponse createBooking(String jwt, Long salonId, PaymentMethod paymentMethod,

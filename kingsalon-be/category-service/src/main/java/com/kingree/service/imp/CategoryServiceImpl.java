@@ -4,8 +4,8 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.kingree.dto.SalonDTO;
 import com.kingree.modal.Category;
+import com.kingree.payload.dto.SalonDTO;
 import com.kingree.repository.CategoryRepository;
 import com.kingree.service.CategoryService;
 
@@ -35,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
     public Category getCategoryById(Long id) throws Exception {
         Category category = categoryRepository.findById(id).orElse(null);
 
-        if(category == null) {
+        if (category == null) {
             throw new Exception("Category not exist with id " + id);
         }
 
@@ -44,13 +44,13 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void deleteCategoryById(Long id, Long salonId) throws Exception {
-       Category existingCategory = categoryRepository.findById(id).orElse(null);
+        Category existingCategory = categoryRepository.findById(id).orElse(null);
 
-        if(existingCategory == null){
+        if (existingCategory == null) {
             throw new Exception("Can not exist category with id " + id + " to delete");
         }
 
-        if(!existingCategory.getSalonId().equals(salonId)){
+        if (!existingCategory.getSalonId().equals(salonId)) {
             throw new Exception("You don't have permission to delete this category");
         }
 
@@ -59,10 +59,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category findByIdAndSalonId(Long id, Long salonId) throws Exception {
-        
-        Category category =  categoryRepository.findByIdAndSalonId(id, salonId);
 
-        if(category == null ){
+        Category category = categoryRepository.findByIdAndSalonId(id, salonId);
+
+        if (category == null) {
             throw new Exception("Category not found");
         }
 

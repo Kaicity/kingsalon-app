@@ -1,4 +1,4 @@
-package com.kingree.dto.event;
+package com.kingree.payload.dto.event;
 
 import com.kingree.domain.PaymentMethod;
 

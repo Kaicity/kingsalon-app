@@ -1,11 +1,12 @@
 package com.kingree.repository;
 
-import com.kingree.modal.Salon;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+import com.kingree.modal.Salon;
 
 public interface SalonRepository extends JpaRepository<Salon, Long> {
     Salon findByOwnerId(Long ownerId);
@@ -14,5 +15,5 @@ public interface SalonRepository extends JpaRepository<Salon, Long> {
             "where lower(s.city) like lower(concat('%', :keyword, '%')) " +
             "or lower(s.name) like lower(concat('%', :keyword, '%')) " +
             "or lower(s.address) like lower(concat('%', :keyword, '%'))")
-    List<Salon> searchSalons(@Param("keyword") String keyword);
+    Page<Salon> searchSalons(@Param("keyword") String keyword, Pageable pageable);
 }

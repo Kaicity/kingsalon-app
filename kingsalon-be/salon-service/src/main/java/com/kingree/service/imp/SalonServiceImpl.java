@@ -9,6 +9,10 @@ import com.kingree.service.SalonService;
 import com.kingree.service.client.UserFeignClient;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -77,7 +81,7 @@ public class SalonServiceImpl implements SalonService {
     }
 
     @Override
-    public List<SalonDTO> getAllSalons() {
+    public Page<SalonDTO> getAllSalons() {
         List<Salon> salons = salonRepository.findAll();
 
         List<SalonDTO> salonDTOS = salons.stream().map((salon) -> {
@@ -85,7 +89,7 @@ public class SalonServiceImpl implements SalonService {
             return salonDTO;
         }).toList();
 
-        return salonDTOS;
+        return new PageImpl<>(salonDTOS);
     }
 
     @Override
@@ -110,14 +114,14 @@ public class SalonServiceImpl implements SalonService {
     }
 
     @Override
-    public List<SalonDTO> searchSalonByCity(String city) {
-        List<Salon> salons = salonRepository.searchSalons(city);
+    public Page<SalonDTO> searchSalonByCity(String keyword, Pageable pageable) {
+        Page<Salon> salons = salonRepository.searchSalons(keyword, pageable);
 
-        List<SalonDTO> salonDTOS = salons.stream().map((salon) -> {
+        List<SalonDTO> salonDTOS = salons.getContent().stream().map((salon) -> {
             SalonDTO salonDTO = salonMapper.mapToDTO(salon);
             return salonDTO;
         }).toList();
 
-        return salonDTOS;
+        return new PageImpl<>(salonDTOS);
     }
 }

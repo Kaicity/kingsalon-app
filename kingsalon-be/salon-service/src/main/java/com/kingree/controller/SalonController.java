@@ -2,6 +2,7 @@ package com.kingree.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kingree.payload.dto.SalonDTO;
+import com.kingree.payload.response.PageResponse;
 import com.kingree.service.SalonService;
 
 import lombok.RequiredArgsConstructor;
@@ -34,8 +36,8 @@ public class SalonController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SalonDTO>> getSalons() {
-        return ResponseEntity.ok(salonService.getAllSalons());
+    public ResponseEntity<PageResponse<SalonDTO>> getSalons() {
+        return ResponseEntity.ok(PageResponse.from(salonService.getAllSalons()));
     }
 
     @GetMapping("/{id}")
@@ -44,8 +46,8 @@ public class SalonController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<SalonDTO>> searchSalons(@RequestParam String city) {
-        return ResponseEntity.ok(salonService.searchSalonByCity(city));
+    public ResponseEntity<PageResponse<SalonDTO>> searchSalons(@RequestParam String keyword, Pageable pageable) {
+        return ResponseEntity.ok(PageResponse.from(salonService.searchSalonByCity(keyword, pageable)));
     }
 
     @GetMapping("/owner")

@@ -1,6 +1,7 @@
 package com.kingree.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.kingree.modal.Review;
 import com.kingree.payload.dto.ReviewRequest;
@@ -9,7 +10,7 @@ public interface ReviewService {
 
     Review createReview(String jwt, ReviewRequest req, Long salonId) throws Exception;
 
-    List<Review> getReviewsBySalonId(Long salonId);
+    Page<Review> getReviewsBySalonId(Long salonId, Pageable pageable);
 
     Review updateReview(ReviewRequest req, Long id, String jwt) throws Exception;
 

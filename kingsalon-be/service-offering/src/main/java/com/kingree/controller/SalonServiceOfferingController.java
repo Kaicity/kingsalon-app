@@ -1,9 +1,9 @@
 package com.kingree.controller;
 
-import com.kingree.dto.CategoryDTO;
-import com.kingree.dto.SalonDTO;
-import com.kingree.dto.ServiceOfferingDTO;
 import com.kingree.modal.ServiceOffering;
+import com.kingree.payload.dto.CategoryDTO;
+import com.kingree.payload.dto.SalonDTO;
+import com.kingree.payload.dto.ServiceOfferingDTO;
 import com.kingree.service.ServiceOfferingService;
 import com.kingree.service.client.CategoryFeignClient;
 import com.kingree.service.client.SalonFeignClient;

@@ -1,20 +1,24 @@
 package com.kingree.service;
 
-import com.kingree.dto.CategoryDTO;
-import com.kingree.dto.SalonDTO;
-import com.kingree.dto.ServiceOfferingDTO;
 import com.kingree.modal.ServiceOffering;
+import com.kingree.payload.dto.CategoryDTO;
+import com.kingree.payload.dto.SalonDTO;
+import com.kingree.payload.dto.ServiceOfferingDTO;
 
 import java.util.Set;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 public interface ServiceOfferingService {
-    ServiceOffering createServiceOffering(SalonDTO salonDTO, ServiceOfferingDTO serviceOfferingDTO, CategoryDTO categoryDTO);
+    ServiceOffering createServiceOffering(SalonDTO salonDTO, ServiceOfferingDTO serviceOfferingDTO,
+            CategoryDTO categoryDTO);
 
     ServiceOffering updateServiceOffering(Long id, ServiceOffering serviceOffering) throws Exception;
 
-    Set<ServiceOffering> getAllServicesOfferingBySalonId(Long salonId, Long categoryId);
+    Page<ServiceOffering> getAllServicesOfferingBySalonId(Long salonId, Long categoryId, Pageable pageable);
 
-    Set<ServiceOffering> getServicesOfferingByIds(Set<Long> ids);
+    Page<ServiceOffering> getServicesOfferingByIds(Set<Long> ids, Pageable pageable);
 
     ServiceOffering getServiceOfferingById(Long id) throws Exception;
 }

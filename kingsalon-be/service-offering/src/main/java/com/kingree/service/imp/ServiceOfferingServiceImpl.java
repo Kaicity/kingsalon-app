@@ -1,16 +1,17 @@
 package com.kingree.service.imp;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.kingree.dto.CategoryDTO;
-import com.kingree.dto.SalonDTO;
-import com.kingree.dto.ServiceOfferingDTO;
 import com.kingree.modal.ServiceOffering;
+import com.kingree.payload.dto.CategoryDTO;
+import com.kingree.payload.dto.SalonDTO;
+import com.kingree.payload.dto.ServiceOfferingDTO;
 import com.kingree.repository.ServiceOfferingRepository;
 import com.kingree.service.ServiceOfferingService;
 
@@ -55,22 +56,20 @@ public class ServiceOfferingServiceImpl implements ServiceOfferingService {
     }
 
     @Override
-    public Set<ServiceOffering> getAllServicesOfferingBySalonId(Long salonId, Long categoryId) {
-        Set<ServiceOffering> services = serviceOfferingRepository.findBySalonId(salonId);
+    public Page<ServiceOffering> getAllServicesOfferingBySalonId(Long salonId, Long categoryId, Pageable pageable) {
 
         if (categoryId != null) {
-            services = services.stream().filter((service) -> service.getCategoryId() != null
-                    && service.getCategoryId() == categoryId).collect(Collectors.toSet());
+            return serviceOfferingRepository.findBySalonIdAndCategoryId(salonId, categoryId, pageable);
         }
 
-        return services;
+        return serviceOfferingRepository.findBySalonId(salonId, pageable);
     }
 
     @Override
-    public Set<ServiceOffering> getServicesOfferingByIds(Set<Long> ids) {
+    public Page<ServiceOffering> getServicesOfferingByIds(Set<Long> ids, Pageable pageable) {
         List<ServiceOffering> services = serviceOfferingRepository.findAllById(ids);
 
-        return new HashSet<>(services);
+        return new PageImpl<>(services);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.kingree.dto;
+package com.kingree.payload.dto;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
 package com.kingree.controller;
 
-import com.kingree.dto.SalonDTO;
 import com.kingree.modal.Category;
+import com.kingree.payload.dto.SalonDTO;
 import com.kingree.service.CategoryService;
 import com.kingree.service.client.SalonFeignClient;
 

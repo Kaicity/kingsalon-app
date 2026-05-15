@@ -3,7 +3,7 @@ package com.kingree.messaging;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.context.annotation.Configuration;
 
-import com.kingree.dto.event.PaymentOrderEvent;
+import com.kingree.payload.dto.event.PaymentOrderEvent;
 import com.kingree.service.BookingService;
 
 import lombok.RequiredArgsConstructor;

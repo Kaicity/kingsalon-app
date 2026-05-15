@@ -1,7 +1,7 @@
 package com.kingree.service;
 
-import com.kingree.dto.SalonDTO;
 import com.kingree.modal.Category;
+import com.kingree.payload.dto.SalonDTO;
 
 import java.util.Set;
 

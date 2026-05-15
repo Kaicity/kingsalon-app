@@ -205,6 +205,7 @@ public class KeycloakService {
                     HttpMethod.POST,
                     requestEntity,
                     KeycloakRole.class);
+
         } catch (Exception e) {
             throw new Exception("Failed to assign new role " + e.getMessage());
         }

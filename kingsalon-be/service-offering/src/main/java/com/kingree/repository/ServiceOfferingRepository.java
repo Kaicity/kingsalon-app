@@ -1,13 +1,16 @@
 package com.kingree.repository;
 
-import com.kingree.modal.ServiceOffering;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Set;
+import com.kingree.modal.ServiceOffering;
 
 public interface ServiceOfferingRepository extends JpaRepository<ServiceOffering, Long> {
 
-    Set<ServiceOffering> findBySalonId(Long salonId);
+    Page<ServiceOffering> findBySalonId(Long salonId, Pageable pageable);
 
-    Set<ServiceOffering> findByCategoryId(Long categoryId);
+    Page<ServiceOffering> findByCategoryId(Long categoryId, Pageable pageable);
+
+    Page<ServiceOffering> findBySalonIdAndCategoryId(Long salonId, Long categoryId, Pageable pageable);
 }

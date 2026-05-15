@@ -2,6 +2,7 @@ package com.kingree.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kingree.modal.Review;
 import com.kingree.payload.dto.ReviewRequest;
+import com.kingree.payload.response.PageResponse;
 import com.kingree.service.ReviewService;
 
 import lombok.RequiredArgsConstructor;
@@ -36,9 +38,9 @@ public class ReviewController {
     }
 
     @GetMapping("/salon/{salonId}")
-    public ResponseEntity<List<Review>> getAllReviewsBySalon(@PathVariable Long salonId) {
+    public ResponseEntity<PageResponse<Review>> getAllReviewsBySalon(@PathVariable Long salonId, Pageable pageable) {
 
-        return ResponseEntity.ok(reviewService.getReviewsBySalonId(salonId));
+        return ResponseEntity.ok(PageResponse.from(reviewService.getReviewsBySalonId(salonId, pageable)));
     }
 
     @PutMapping("/{id}")

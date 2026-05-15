@@ -1,5 +1,9 @@
 package com.kingree.service.imp;
 
+import java.time.LocalDateTime;
+
+import org.springframework.stereotype.Service;
+
 import com.kingree.modal.User;
 import com.kingree.payload.dto.SignupDTO;
 import com.kingree.payload.response.AuthResponse;
@@ -7,16 +11,13 @@ import com.kingree.payload.response.TokenResponse;
 import com.kingree.repository.UserRepository;
 import com.kingree.service.AuthService;
 import com.kingree.service.KeycloakService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
-    @Autowired
+
     private final UserRepository userRepository;
     private final KeycloakService keycloakService;
 
@@ -26,8 +27,7 @@ public class AuthServiceImpl implements AuthService {
                 email,
                 password,
                 "password",
-                null
-        );
+                null);
 
         AuthResponse authResponse = new AuthResponse();
         authResponse.setRefresh_token(tokenResponse.getRefreshToken());
@@ -55,8 +55,7 @@ public class AuthServiceImpl implements AuthService {
                 req.getUsername(),
                 req.getPassword(),
                 "password",
-                null
-        );
+                null);
 
         AuthResponse authResponse = new AuthResponse();
         authResponse.setRefresh_token(tokenResponse.getRefreshToken());
@@ -73,8 +72,7 @@ public class AuthServiceImpl implements AuthService {
                 null,
                 null,
                 "refresh_token",
-                refreshToken
-        );
+                refreshToken);
 
         AuthResponse authResponse = new AuthResponse();
         authResponse.setRefresh_token(tokenResponse.getRefreshToken());

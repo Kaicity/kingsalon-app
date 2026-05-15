@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-import com.kingree.dto.SalonDTO;
+import com.kingree.payload.dto.SalonDTO;
 
 @FeignClient("salon-service")
 public interface SalonFeignClient {

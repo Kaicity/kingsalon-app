@@ -2,6 +2,9 @@ package com.kingree.service.imp;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.kingree.modal.Review;
@@ -41,8 +44,8 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Review> getReviewsBySalonId(Long salonId) {
-        return reviewRepository.findBySalonId(salonId);
+    public Page<Review> getReviewsBySalonId(Long salonId, Pageable pageable) {
+        return reviewRepository.findBySalonId(salonId, pageable);
     }
 
     @Override

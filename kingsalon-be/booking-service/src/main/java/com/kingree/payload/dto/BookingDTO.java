@@ -1,4 +1,4 @@
-package com.kingree.dto;
+package com.kingree.payload.dto;
 
 import com.kingree.domain.BookingStatus;
 import lombok.Data;
