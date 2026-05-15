@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+/* ================= BASE ================= */
+:root {
+  --radius: 0.75rem;
+
+  /* nền */
+  --background: 0 0% 100%;
+  --foreground: 240 10% 10%;
+
+  --border: 30 20% 85%;
+  --input: 30 20% 85%;
+  --ring: 25 70% 65%;
+
+  /* default = customer */
+  --primary: 25 70% 65%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 30 50% 90%;
+  --secondary-foreground: 20 30% 20%;
+
+  --accent: 15 80% 70%;
+  --accent-foreground: 0 0% 100%;
+
+  /* semantic */
+  --success: 140 60% 45%;
+  --warning: 40 90% 55%;
+  --destructive: 0 75% 55%;
+}
+
+/* ================= ROLE THEMES ================= */
+
+.theme-customer {
+  --primary: 25 70% 65%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 30 50% 90%;
+  --secondary-foreground: 20 30% 20%;
+
+  --accent: 15 80% 70%;
+  --accent-foreground: 0 0% 100%;
+}
+
+.theme-admin {
+  --primary: 240 10% 20%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 240 5% 90%;
+  --secondary-foreground: 240 10% 20%;
+
+  --accent: 240 50% 50%;
+  --accent-foreground: 0 0% 100%;
+}
+
+.dark {
+  --background: 240 10% 10%;
+  --foreground: 0 0% 100%;
+
+  --border: 240 5% 20%;
+  --input: 240 5% 20%;
+  --ring: 25 70% 70%;
+
+  --primary: 25 70% 70%;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-success: hsl(var(--success));
+  --color-warning: hsl(var(--warning));
+  --color-destructive: hsl(var(--destructive));
+}
+
+/* ================= BASE APPLY ================= */
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
